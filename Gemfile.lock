@@ -15,6 +15,8 @@ GEM
     coderay (1.1.3)
     concurrent-ruby (1.1.8)
     diff-lcs (1.4.4)
+    faker (2.18.0)
+      i18n (>= 1.6, < 2)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     method_source (1.0.0)
@@ -67,6 +69,7 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
+  faker
   pry
   rack
   rack-cors
@@ -78,4 +81,4 @@ DEPENDENCIES
   sqlite3
 
 BUNDLED WITH
-   2.1.4
+   2.2.14
