@@ -3,7 +3,7 @@ class Application
     req = Rack::Request.new(env)
 
     if req.path.match(/user=/)
-      find_user(req.path.split('=').last)
+      find_user(req.path.split('=').last.split('&'))
     else
       send_not_found
     end
@@ -11,16 +11,18 @@ class Application
 
   private
 
-  def send_hello
-    return [200, { "Content-Type" => "application/json" }, [{ :message => "hello world!" }.to_json]]
-  end
-
   def send_not_found
     return [404, {}, ["Path not found!!!"]]
   end
 
-  def find_user(username_string)
-    result =  User.find_by(username: username_string)
-    return [200, { "Content-Type" => "application/json" }, [{ :message => result }.to_json]]
+  def find_user(userInfoArray)
+    result =  User.find_by(username: userInfoArray.first)
+    if !result 
+      return [200, { "Content-Type" => "application/json" }, [{error: "User does not exist"}.to_json]]
+    elsif result.password == userInfoArray.last
+      return [200, { "Content-Type" => "application/json" }, [result.to_json]]
+    else 
+      return [200, { "Content-Type" => "application/json" }, [{error: "Incorrect password"}.to_json]]
+    end
   end
 end

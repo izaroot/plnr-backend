@@ -183,7 +183,7 @@ end
         profile_img: Faker::SlackEmoji.people,
         birthdate: Faker::Date.birthday(min_age: 18, max_age: 65), 
         username: "#{Faker::Name.first_name}#{Faker::Number.number(digits: 2)}",
-        password: Faker::String.random(length: 3),
+        password: "#{Faker::Verb.base}#{Faker::Number.number(digits: 2)}",
         )
 end
 
