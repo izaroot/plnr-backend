@@ -189,7 +189,7 @@ end
 
 50.times do
     UserTask.create(
-        start_time: Faker::Time.between(from: DateTime.now - 30, to: DateTime.now, format: :default),
+        start_time: Faker::Time.between(from: DateTime.now - 3, to: DateTime.now, format: :default),
         end_time: Faker::Time.forward(days: 1, format: :default),
         user_id: User.ids.sample,
         task_id: Task.ids.sample,
