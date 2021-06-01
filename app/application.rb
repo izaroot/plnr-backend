@@ -20,7 +20,7 @@ class Application
     if !result 
       return [200, { "Content-Type" => "application/json" }, [{error: "User does not exist"}.to_json]]
     elsif result.password == userInfoArray.last
-      return [200, { "Content-Type" => "application/json" }, [result.to_json(:include => {:user_tasks => {
+      return [200, { "Content-Type" => "application/json" }, [result.to_json(:methods => :tasks_by_week, :include => {:user_tasks => {
         :include => :task
         }})]]
     else 
