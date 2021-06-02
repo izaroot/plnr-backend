@@ -180,7 +180,7 @@ end
 10.times do
     User.create(
         name: Faker::FunnyName.name,
-        profile_img: Faker::SlackEmoji.people,
+        profile_img: Faker::LoremFlickr.image,
         birthdate: Faker::Date.birthday(min_age: 18, max_age: 65), 
         username: "#{Faker::Name.first_name}#{Faker::Number.number(digits: 2)}",
         password: "#{Faker::Verb.base}#{Faker::Number.number(digits: 2)}",
@@ -189,8 +189,8 @@ end
 
 50.times do
     UserTask.create(
-        start_time: Faker::Time.between(from: DateTime.now - 3, to: DateTime.now).strftime("%A-%b-%d-%Y%k"),
-        end_time: Faker::Time.forward(days: 1).strftime("%A-%b-%d-%Y%k"),
+        start_time: Faker::Time.between(from: DateTime.now - 3, to: DateTime.now).strftime("%l,%P,%A,%U,%B,%d,%Y,%s"),
+        end_time: Faker::Time.forward(days: 1).strftime("%l,%P,%A,%U,%B,%d,%Y,%s"),
         user_id: User.ids.sample,
         task_id: Task.ids.sample,
         is_complete: rand < 0.5,
