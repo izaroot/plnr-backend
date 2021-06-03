@@ -180,7 +180,7 @@ end
 10.times do
     User.create(
         name: Faker::FunnyName.name,
-        profile_img: Faker::LoremFlickr.image,
+        profile_img: Faker::LoremFlickr.image(search_terms: ['kittens']),
         birthdate: Faker::Date.birthday(min_age: 18, max_age: 65), 
         username: "#{Faker::Name.first_name}#{Faker::Number.number(digits: 2)}",
         password: "#{Faker::Verb.base}#{Faker::Number.number(digits: 2)}",

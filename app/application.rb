@@ -10,6 +10,23 @@ class Application
       get_tasks
     elsif req.path.match(/newusertask/) && req.post?
       new_user_task(req)
+    elsif req.path.match(/usertasks/) && req.delete?
+      id = req.path.split("/").last
+      found_user_task = UserTask.find(id)
+      found_user_task.destroy
+
+      return[200, { "Content-Type" => "application/json" }, [found_user_task.to_json] ]
+    elsif req.path.match(/usertasks/) && req.patch?
+      user_task_hash = JSON.parse(req.body.read)
+      if user_task_hash["start_time"]
+        user_task_hash["start_time"] = DateTime.parse(user_task_hash["start_time"]).strftime("%l,%P,%A,%U,%B,%d,%Y,%s")  
+      end
+
+      id = req.path.split("/").last
+      found_user_task = UserTask.find(id)
+
+      found_user_task.update(user_task_hash)
+      return [200, { "Content-Type" => "application/json" }, [found_user_task.to_json(:include => :task)]]
     else
       send_not_found
     end
