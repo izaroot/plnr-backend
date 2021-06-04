@@ -27,6 +27,8 @@ class Application
 
       found_user_task.update(user_task_hash)
       return [200, { "Content-Type" => "application/json" }, [found_user_task.to_json(:include => :task)]]
+    elsif req.path.match(/mostpoptoday/) && req.get?
+      return [200, { "Content-Type" => "application/json" }, [UserTask.most_popular_today.to_json] ]
     else
       send_not_found
     end
